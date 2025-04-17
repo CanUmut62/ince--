@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Benimle Çıkar mısın?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            background-color: #f0f8ff;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #333;
+        }
+
+        .buttons {
+            margin-top: 50px;
+            position: relative;
+        }
+
+        #yesBtn {
+            font-size: 30px;
+            padding: 20px 40px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #noBtn {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Benimle çıkar mısın?</h1>
+    <div class="buttons">
+        <a href="kabul.html">
+            <button id="yesBtn">Evet</button>
+        </a>
+        <button id="noBtn">Hayır</button>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const container = document.querySelector('.buttons');
+
+        function moveNoButton() {
+            const maxX = container.offsetWidth - noBtn.offsetWidth;
+            const maxY = 300;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
+        }
+
+        noBtn.addEventListener('mouseenter', moveNoButton);
+    </script>
+
+</body>
+
+</html>

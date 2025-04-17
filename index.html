@@ -43,8 +43,6 @@
             transition: transform 0.2s ease, background 0.2s ease;
         }
 
-
-
         #yesBtn {
             background: #4CAF50;
             color: white;
@@ -89,6 +87,7 @@
     <script>
         const noBtn = document.getElementById('noBtn');
         const container = document.querySelector('.buttons');
+
         function moveNoButton() {
             const maxX = container.clientWidth - noBtn.clientWidth;
             const maxY = container.clientHeight - noBtn.clientHeight;
@@ -97,10 +96,29 @@
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
         }
-        noBtn.addEventListener('pointerenter', moveNoButton);
-        noBtn.addEventListener('pointerdown', moveNoButton);
-        noBtn.addEventListener('click', moveNoButton);
-        noBtn.addEventListener('touchstart', moveNoButton);
+
+        // Cihaz genişliğine göre davranış
+        function setupNoBtnEvents() {
+            const isMobile = window.matchMedia('(max-width: 480px)').matches;
+            const events = isMobile ? ['click'] : ['click', 'mouseenter'];
+            // Her olay tetiklendiğinde konumu değiştir
+            events.forEach(evt => {
+                noBtn.addEventListener(evt, function (e) {
+                    e.preventDefault();
+                    moveNoButton();
+                }, { passive: false });
+            });
+        }
+
+        // Başlangıç ve yeniden boyutlandırmada tekrar ayarla
+        setupNoBtnEvents();
+        window.addEventListener('resize', () => {
+            // Önce tüm eventleri temizle
+            ['click', 'mouseenter'].forEach(evt => noBtn.replaceWith(noBtn.cloneNode(true)));
+            // Yeni referans al
+            const newBtn = document.getElementById('noBtn');
+            setupNoBtnEvents();
+        });
     </script>
 </body>
 

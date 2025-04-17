@@ -69,19 +69,18 @@
     <script>
         const noBtn = document.getElementById('noBtn');
         const container = document.querySelector('.buttons');
-
         function moveNoButton() {
-            const maxX = container.offsetWidth - noBtn.offsetWidth;
-            const maxY = 300;
-
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
-
-            noBtn.style.left = `${randomX}px`;
-            noBtn.style.top = `${randomY}px`;
+            const maxX = container.clientWidth - noBtn.clientWidth;
+            const maxY = container.clientHeight - noBtn.clientHeight;
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
         }
-
-        noBtn.addEventListener('mouseenter', moveNoButton);
+        // hem fare, hem dokunma, hem tıklama olaylarını destekle
+        noBtn.addEventListener('pointerenter', moveNoButton);
+        noBtn.addEventListener('pointerdown', moveNoButton);
+        noBtn.addEventListener('click', moveNoButton);
     </script>
 
 </body>
